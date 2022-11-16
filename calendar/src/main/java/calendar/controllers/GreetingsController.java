@@ -48,7 +48,6 @@ public class GreetingsController {
     @ResponseBody /* Retorno do Json */
      public ResponseEntity<List<Tarefa>> listaTarefa(){
         List<Tarefa> tarefas = tarefaRepository.findAll();
-        System.out.print(tarefas.get(0).getTitulo());
         return new ResponseEntity<List<Tarefa>>(tarefas, HttpStatus.OK);
      }
      @PostMapping(value = "salvarTarefa")
@@ -61,7 +60,7 @@ public class GreetingsController {
 
      @DeleteMapping(value = "deletarTarefa")
      @ResponseBody
-     public ResponseEntity<String>deletarTarefa(@RequestParam Long idTarefa){
+     public ResponseEntity<String>deletarTarefa(@RequestParam(name="idTarefa") Long idTarefa){
          tarefaRepository.deleteById(idTarefa);
 
          return new ResponseEntity<String>("Tarefa Removida!",HttpStatus.OK);
